@@ -25,4 +25,9 @@ public class Field {
 		// TODO Auto-generated method stub
 		return currentValue + "";
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return this.currentValue == ((Field) obj).currentValue;
+	}
 }
