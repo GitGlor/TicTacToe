@@ -1,5 +1,7 @@
 package Main;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
+
 import rules.GameRules;
 import rules.XOGameRules;
 import view.GameView;
@@ -11,17 +13,19 @@ public class Game implements Renderable {
 	private Board board;
 	private boolean isXTurn;
 	private GameView gameView;
+	private GameRules gameRules;
 	
 	public Game(GameView gameView, GameRules gameRules) {
 		this.gameView = gameView;
-		board = new Board(gameRules);
+		this.gameRules = gameRules;
+		board = new Board();
 	}
 	
 	public void startGame() {
 		playerX = new Player("Duca", 'x');
 		playerO = new Player("Kresa", 'y');
 		isXTurn = true;
-		
+		gameView.render(this);
 	}
 
 	public Player getPlayerX() {
@@ -48,17 +52,6 @@ public class Game implements Renderable {
 		this.board = board;
 	}
 
-	@Override
-	public String getGameState() {
-		if (board.isGameOver()) {
-			return "GAME OVER \n" + this.board.getGameState();
-		} else if(isXTurn) {
-		    return "X's turn \n" + this.board.getGameState();
-		} else {
-		 	return "Y's turn \n" + this.board.getGameState();
-		}
-	}
-	
 	public void chooseField(int x, int y) {
 		try {
 		int value = isXTurn ? 1 : 0;
@@ -71,5 +64,15 @@ public class Game implements Renderable {
 		gameView.render(this);
 	}
 	
+	@Override
+	public GameState getGameState() {
+		if (gameRules.isVictory(board.getFields())) {
+			return isXTurn ? GameState.WIN_X : GameState.WIN_Y;
+		} else if (gameRules.isFull(board.getFields())) {
+			return GameState.DRAW;
+		} else {
+			return isXTurn ? GameState.MOVE_X : GameState.MOVE_Y;
+		}		
+	}
 	
 }

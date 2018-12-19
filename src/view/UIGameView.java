@@ -44,8 +44,7 @@ public class UIGameView extends JFrame implements GameView {
 
 	@Override
 	public void render(Renderable renderable) {
-		
-		textArea.setText(renderable.getGameState());
+		textArea.setText(renderable.getGameState().name());
 	}
 	
 

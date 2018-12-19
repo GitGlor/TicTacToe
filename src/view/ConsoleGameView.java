@@ -1,11 +1,12 @@
 package view;
 
-import Main.Renderable;
+import Main.Game;
 
-public class ConsoleGameView implements GameView {
+public class ConsoleGameView implements GameView<Game> {
 
 	@Override
-	public void render(Renderable renderable) {
+	public void render(Game renderable) {		
+		System.out.println(renderable.getBoard());
 		System.out.println(renderable.getGameState());
-	}
+	}	
 }

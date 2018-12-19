@@ -18,8 +18,4 @@ public abstract class GameRules {
 		}
 		return isFull;
 	}
-	
-	public boolean isGameOver(Field[][] fields) {
-		return isFull(fields) || isVictory(fields);
-	}
 }

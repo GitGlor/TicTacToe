@@ -2,7 +2,8 @@ package view;
 
 import Main.Renderable;
 
-public interface GameView {
+public interface GameView<T extends Renderable> {
 
-	void render(Renderable renderable);
+	void render(T renderable);
 }
+
