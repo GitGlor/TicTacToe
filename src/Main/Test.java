@@ -12,8 +12,8 @@ import view.RedConsoleGameView;
 import view.UIGameView;
 
 public class Test {
-
 	public static void main(String[] args) {
+		Field[][] fields;
 		
 		ConsoleGameView consoleGameView = new ConsoleGameView();
 		RedConsoleGameView redConsoleGameView = new RedConsoleGameView();
@@ -25,8 +25,6 @@ public class Test {
 		
 		Game game = new Game(consoleGameView, gameRules);
 		
-		
-
 		game.startGame();
 		
 //		//x
@@ -49,27 +47,41 @@ public class Test {
 //		game.chooseField(2, 1);
 		
 		
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); 
-      
-     // Reading data using readLine 
-     String name = "error";
-	try {
-		name = reader.readLine();
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} 
+	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); 
+    
+	
+	while (true) {
+		System.out.println("Type in position in format x-y");
+		
+		
+		String name = "error";
+		try {
+			name = reader.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
 
-     // Printing the read line 
-     System.out.println(name);
-     
-     String[] positions = name.split("-");
-     String positionX = positions[0];
-     String positionY = positions[1];
-     int x = Integer.parseInt(positionX);
-     int y = Integer.parseInt(positionY);
-     
-     game.chooseField(x, y);
+	    System.out.println(name);
+	    
+	    try {
+	    	String[] positions = name.split("-");
+		    String positionX = positions[0];
+		    String positionY = positions[1];
+		    
+		    int x = Integer.parseInt(positionX);
+		    int y = Integer.parseInt(positionY);
+		     
+		    game.chooseField(x, y);
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.err.println("Invalid format, must be in x-y format");
+		}
+	    
+		if () {
+	    	break;
+	    }
+		
+	}
+	
 
 	}
 
